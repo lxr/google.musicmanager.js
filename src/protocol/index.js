@@ -78,7 +78,8 @@ var protocol = new (function () {
   
   this.readMetadata = function (file, callback) {
     var asset = AV.Asset.fromFile(file);
-    var hasher = new SparkMD5.ArrayBuffer();
+    var hash = dcodeIO.Long.fromString('14695981039346656037', true);
+    var hashKey = dcodeIO.Long.fromString('1099511628211', true);
     var image = null;
     var track = {
       estimated_size: file.size,
@@ -91,7 +92,12 @@ var protocol = new (function () {
     
     asset.start();
     
-    asset.on('data', hasher.append.bind(hasher));
+    asset.on('data', function (datum) {
+      datum = new Uint8Array(datum);
+      for (var i = 0; i < datum.length; ++i) {
+        hash = hash.xor(datum[i]).multiply(hashKey);
+      }
+    });
     
     asset.on('duration', function (duration) {
       track.duration_millis = duration;
@@ -122,7 +128,7 @@ var protocol = new (function () {
     asset.source.on('end', function () {
       image = track.album_art_ref;
       delete track.album_art_ref;
-      track.client_id = hasher.end();
+      track.client_id = hash.toString(16);
       callback(null, track, image, file);
     });
   }
