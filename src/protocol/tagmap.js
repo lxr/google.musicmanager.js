@@ -1,8 +1,9 @@
 var tagmap = (function () {
   
   function id(x) { return x }
-  function attrgetter(name) { return function (x) { return x[name] } }
+  function attrgetter(name, f) { return function (x) { return f(x[name]) } }
   function parseYear(s) { return parseInt(s.slice(0,4)) }
+  function stripNull(x) { return x.replace(/\0/g, '') }
   
   function cut(i) {
     return function (x) {
@@ -12,14 +13,14 @@ var tagmap = (function () {
   }
   
   return {
-    /* TIT2 */ "title": { "title": id },
-    /* TALB */ "album": { "album": id },
-    /* TPE1 */ "artist": { "artist": id },
-    /* TPE2 */ "albumArtist": { "album_artist": id },
-    /* TCOM */ "composer": { "composer": id },
-    /* TCON */ "genre": { "genre": id },
+    /* TIT2 */ "title": { "title": stripNull },
+    /* TALB */ "album": { "album": stripNull },
+    /* TPE1 */ "artist": { "artist": stripNull },
+    /* TPE2 */ "albumArtist": { "album_artist": stripNull },
+    /* TCOM */ "composer": { "composer": stripNull },
+    /* TCON */ "genre": { "genre": stripNull },
     /* PCNT */ "playCount": { "play_count": parseInt },
-    /* COMM */ "comments": { "comment": attrgetter('value') },
+    /* COMM */ "comments": { "comment": attrgetter('value', stripNull) },
     /* TCMP */ "compilation": { "compilation": Boolean },
     /* TBPM */ "tempo": { "beats_per_minute": parseInt },
     /* TYER */ "year": { "year": parseInt },
@@ -33,9 +34,9 @@ var tagmap = (function () {
       "disc_number": cut(0),
       "total_disc_count": cut(1),
     },
-    /* APIC */ "coverArt": { "album_art_ref": attrgetter('data') },
+    /* APIC */ "coverArt": { "album_art_ref": attrgetter('data', id) },
     /* POPM */ "rating": {
-      "play_count": attrgetter('counter'),
+      "play_count": attrgetter('counter', parseInt),
       "rating": function (x) {
         if(x.rating === 0) { return 1; }
         return Math.round(x.rating / 64) + 2;
