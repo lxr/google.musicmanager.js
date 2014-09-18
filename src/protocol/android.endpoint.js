@@ -793,7 +793,7 @@ var android = dcodeIO.ProtoBuf.newBuilder().import({
               "id": 15
             },
             {
-              "name": "AUTH_ERROR",
+              "name": "UPGRADE_MUSIC_MANAGER",
               "id": 16
             }
           ],
