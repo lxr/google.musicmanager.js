@@ -20,12 +20,17 @@ var tagmap = (function () {
     /* TCOM */ "composer": { "composer": stripNull },
     /* TCON */ "genre": { "genre": stripNull },
     /* PCNT */ "playCount": { "play_count": parseInt },
-    /* COMM */ "comments": { "comment": attrgetter('value', stripNull) },
     /* TCMP */ "compilation": { "compilation": Boolean },
     /* TBPM */ "tempo": { "beats_per_minute": parseInt },
     /* TYER */ "year": { "year": parseInt },
     /* TDRL */ "releaseTime": { "year": parseYear },
     /* TDRC */ "recordingTime": { "year": parseYear },
+    /* COMM */ "comments": {
+      "comment": function (x) {
+        if (Array.isArray(x)) { x = x[0] || {}; }
+        return stripNull(x.value || "");
+      },
+    },
     /* TRCK */ "trackNumber": {
       "track_number": cut(0),
       "total_track_count": cut(1),
