@@ -85,7 +85,7 @@ fl.async._applyToAll = function (/* nargout, limit, f, args..., callback */) {
         context,
         args.map(function (col) { return col[k] }).concat(_next.bind(null, k))
       );
-    } else if(callback && finished === nargin) {
+    } else if (callback && finished === nargin) {
       callback.apply(context, [null].concat(results));
     }
   }

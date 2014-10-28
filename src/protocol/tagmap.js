@@ -43,7 +43,7 @@ var tagmap = (function () {
     /* POPM */ "rating": {
       "play_count": attrgetter('counter', parseInt),
       "rating": function (x) {
-        if(x.rating === 0) { return 1; }
+        if (x.rating === 0) { return 1; }
         return Math.round(x.rating / 64) + 2;
       },
     },
