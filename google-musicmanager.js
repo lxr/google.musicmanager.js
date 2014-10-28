@@ -823,7 +823,7 @@ var gmusicmanager = new (function () {
                   "id": 15
                 },
                 {
-                  "name": "AUTH_ERROR",
+                  "name": "UPGRADE_MUSIC_MANAGER",
                   "id": 16
                 }
               ],
@@ -5241,12 +5241,17 @@ var gmusicmanager = new (function () {
         /* TCOM */ "composer": { "composer": stripNull },
         /* TCON */ "genre": { "genre": stripNull },
         /* PCNT */ "playCount": { "play_count": parseInt },
-        /* COMM */ "comments": { "comment": attrgetter('value', stripNull) },
         /* TCMP */ "compilation": { "compilation": Boolean },
         /* TBPM */ "tempo": { "beats_per_minute": parseInt },
         /* TYER */ "year": { "year": parseInt },
         /* TDRL */ "releaseTime": { "year": parseYear },
         /* TDRC */ "recordingTime": { "year": parseYear },
+        /* COMM */ "comments": {
+          "comment": function (x) {
+            if (Array.isArray(x)) { x = x[0] || {}; }
+            return stripNull(x.value || "");
+          },
+        },
         /* TRCK */ "trackNumber": {
           "track_number": cut(0),
           "total_track_count": cut(1),
@@ -5259,7 +5264,7 @@ var gmusicmanager = new (function () {
         /* POPM */ "rating": {
           "play_count": attrgetter('counter', parseInt),
           "rating": function (x) {
-            if(x.rating === 0) { return 1; }
+            if (x.rating === 0) { return 1; }
             return Math.round(x.rating / 64) + 2;
           },
         },
@@ -5560,7 +5565,7 @@ var gmusicmanager = new (function () {
           context,
           args.map(function (col) { return col[k] }).concat(_next.bind(null, k))
         );
-      } else if(callback && finished === nargin) {
+      } else if (callback && finished === nargin) {
         callback.apply(context, [null].concat(results));
       }
     }
