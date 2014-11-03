@@ -106,7 +106,10 @@ var protocol = new (function () {
     asset.on('metadata', function (metadata) {
       for (var key in metadata) {
         for (var field in tagmap[key] || {}) {
-          track[field] = tagmap[key][field](metadata[key]);
+          var value = tagmap[key][field](metadata[key]);
+          if (value !== undefined) {
+            track[field] = value;
+          }
         }
       }
     });
@@ -169,7 +172,11 @@ var protocol = new (function () {
             body[key] = arg;
           }
         });
-        body = opts.encode(body);
+        try {
+          body = opts.encode(body);
+        } catch (e) {
+          return callback(e);
+        }
       } else {
         body = null;
       }

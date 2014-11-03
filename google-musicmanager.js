@@ -5228,8 +5228,8 @@ var gmusicmanager = new (function () {
       
       function cut(i) {
         return function (x) {
-          var y = x.split('/')[i];
-          return y && parseInt(y);
+          var y = parseInt(x.split('/')[i]);
+          return isNaN(y) ? undefined : y;
         }
       }
       
@@ -5369,7 +5369,10 @@ var gmusicmanager = new (function () {
       asset.on('metadata', function (metadata) {
         for (var key in metadata) {
           for (var field in tagmap[key] || {}) {
-            track[field] = tagmap[key][field](metadata[key]);
+            var value = tagmap[key][field](metadata[key]);
+            if (value !== undefined) {
+              track[field] = value;
+            }
           }
         }
       });
@@ -5432,7 +5435,11 @@ var gmusicmanager = new (function () {
               body[key] = arg;
             }
           });
-          body = opts.encode(body);
+          try {
+            body = opts.encode(body);
+          } catch (e) {
+            return callback(e);
+          }
         } else {
           body = null;
         }

@@ -7,8 +7,8 @@ var tagmap = (function () {
   
   function cut(i) {
     return function (x) {
-      var y = x.split('/')[i];
-      return y && parseInt(y);
+      var y = parseInt(x.split('/')[i]);
+      return isNaN(y) ? undefined : y;
     }
   }
   
