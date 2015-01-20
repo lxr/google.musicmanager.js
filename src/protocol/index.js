@@ -92,10 +92,10 @@ var protocol = new (function () {
     
     asset.start();
     
-    asset.on('data', function (datum) {
-      datum = new Uint8Array(datum);
-      for (var i = 0; i < datum.length; ++i) {
-        hash = hash.xor(datum[i]).multiply(hashKey);
+    asset.source.on('data', function (buffer) {
+      buffer = buffer.data;
+      for (var i = 0; i < buffer.length; ++i) {
+        hash = hash.xor(buffer[i]).multiply(hashKey);
       }
     });
     
