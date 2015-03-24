@@ -3,7 +3,7 @@ var tagmap = (function () {
   function id(x) { return x }
   function attrgetter(name, f) { return function (x) { return f(x[name]) } }
   function parseYear(s) { return parseInt(s.slice(0,4)) }
-  function stripNull(x) { return x.replace(/\0/g, '') }
+  function stripNull(x) { return x.replace(/\0$/, '') }
   
   function cut(i) {
     return function (x) {
