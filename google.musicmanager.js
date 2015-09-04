@@ -22,7 +22,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 */
-var gmusicmanager = new (function () {
+this.google = this.google || {};
+this.google.musicmanager = new (function () {
   "use strict";
   
   var protocol = new (function () {

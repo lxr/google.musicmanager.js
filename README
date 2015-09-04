@@ -56,7 +56,8 @@ Usage
 
 	<script>
 
-	var client = new gmusicmanager.Client("client id", "OAuth2.0 token");
+	var mm = google.musicmanager;
+	var client = new mm.Client("client id", "OAuth2.0 token");
 	var register = client.register("client name");
 	register.on("error", failure_callback);
 	register.on("end", success_callback);

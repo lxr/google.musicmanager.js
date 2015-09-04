@@ -1,4 +1,5 @@
-var gmusicmanager = new (function () {
+this.google = this.google || {};
+this.google.musicmanager = new (function () {
   "use strict";
   
   //require protocol/index.js
