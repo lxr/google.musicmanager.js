@@ -5301,7 +5301,7 @@ this.google.musicmanager = new (function () {
     
     this.getUploadSession = newRpc({
       method: 'POST',
-      url: 'https://uploadsj.clients.google.com/uploadsj/rupio',
+      url: 'https://uploadsj.clients.google.com/uploadsj/scottyagent',
       body: [
         'UploaderId',
         'ClientId',
