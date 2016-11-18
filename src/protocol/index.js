@@ -83,8 +83,7 @@ var protocol = new (function () {
     var image = null;
     var track = {
       estimated_size: file.size,
-      last_modified_timestamp:
-        Math.round(file.lastModifiedDate.getTime() / 1000),
+      last_modified_timestamp: Math.round(file.lastModified / 1000),
       title: file.name,
       original_bit_rate: 0,
       content_type: android.Track.ContentType.MP3,
