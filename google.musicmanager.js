@@ -1,6 +1,6 @@
 /*!
 
-Copyright (c) 2014-5 Lari Rasku <lari.o.rasku@gmail.com>
+Copyright (c) 2014-6 Lari Rasku <lari.o.rasku@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the
