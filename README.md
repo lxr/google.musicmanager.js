@@ -12,7 +12,7 @@ other than the interface and the instructions that we provide."
 Use at your own risk.
 
 For an example project utilizing this library, see the [Google Play
-Music Uploader] [4] userscript.
+Music Uploader] [4] WebExtension.
 
 # Requirements
 
@@ -97,5 +97,5 @@ this behavior.
 [1]: https://unofficial-google-music-api.readthedocs.org/en/latest/reference/musicmanager.html
 [2]: https://github.com/simon-weber/gmusicapi
 [3]: https://www.google.com/intl/en/policies/terms/
-[4]: https://code.google.com/p/google-musicmanager-user-js/
+[4]: https://github.com/lxr/Google-Play-Music-Uploader
 [5]: https://code.google.com/p/google-musicmanager-js/wiki/INTRO
