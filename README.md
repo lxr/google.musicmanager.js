@@ -66,7 +66,7 @@ upload.start();
 </script>
 ```
 
-A complete API reference is still available on [Google Code] [5].
+A complete API reference is available on the wiki.
 
 # Bugs
 
@@ -98,4 +98,3 @@ this behavior.
 [2]: https://github.com/simon-weber/gmusicapi
 [3]: https://www.google.com/intl/en/policies/terms/
 [4]: https://github.com/lxr/Google-Play-Music-Uploader
-[5]: https://code.google.com/p/google-musicmanager-js/wiki/INTRO
